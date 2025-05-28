@@ -1,6 +1,6 @@
 import './App.css'
 
-import Register from './components/Register';
+import HookExam from './components/HookExam';
 
 function App() {
   // console.log(state);
@@ -8,7 +8,7 @@ function App() {
 
   return (
     <>
-      <Register />
+      <HookExam />
     </>
   );
 }
