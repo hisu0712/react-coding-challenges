@@ -1,11 +1,19 @@
 import "./ContactItem.css";
 
-export default function ContactItem() {
+export default function ContactItem({ id, name, email, onDelete }) {
+  const onClickDelete = () => {
+    onDelete(id);
+  };
+
   return (
     <div className="ContactItem">
-      <div className="name">이정환</div>
-      <div className="contact">king199777@gmail.com</div>
-      <button>🗑️ Remove</button>
+      <div className="name">{name}</div>
+      <div className="contact">{email}</div>
+
+      <button onClick={onClickDelete}>🗑️ Remove</button>
+      {/* 코드 리뷰 */}
+      {/* 화살표 함수 가능: 위에 함수 만들 필요 없음 */}
+      {/* <button onClick={() => onDelete(id)}>🗑️ Remove</button> */}
     </div>
   );
 }
