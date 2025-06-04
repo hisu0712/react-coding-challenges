@@ -1,20 +1,20 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 import "./ContactEditor.css";
+import { ContactDispatchContext } from "../App";
 
-export default function ContactEditor({ onCreate }) {
+export default function ContactEditor() {
+  const { onCreate } = useContext(ContactDispatchContext);
+
   const [info, setInfo] = useState({ name: "", email: "" });
 
   const inputNameRef = useRef();
   const inputEmailRef = useRef();
 
-  /* 입력된 값을 보관하는 이벤트 핸들러 */
   const onChangeInfo = (e) => {
     setInfo({ ...info, [e.target.name]: e.target.value });
   };
 
   const onAdd = () => {
-    // 코드리뷰 : 폼 입력값이 문자열인지 확실할 때는 빈문자열인지만 검사하면됨(폼 검증에서 자주 쓰임)
-    // if (info.name === "" || info.email === "")
     if (!info.name || !info.email) {
       if (!info.name) {
         inputNameRef.current.focus();
@@ -25,9 +25,6 @@ export default function ContactEditor({ onCreate }) {
     }
 
     onCreate(info);
-    // 코드 리뷰 : 이렇게 객체 형태가 아닌 풀어진 형태로 넘겨도 된다.
-    // onCrate(info.name, info.email)
-
     setInfo({ name: "", email: "" });
   };
 
