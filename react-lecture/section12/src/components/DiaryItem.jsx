@@ -7,8 +7,11 @@ import { DiaryDispatchContext } from "../App";
 
 const DiaryItem = ({ id, emotionId, createdDate, content }) => {
     const nav = useNavigate();
-
     const { onDelete } = useContext(DiaryDispatchContext);
+
+    const onClickDeleteButton = () => {
+        onDelete(id);
+    }
 
     return (
         <div className="DiaryItem">
@@ -30,7 +33,7 @@ const DiaryItem = ({ id, emotionId, createdDate, content }) => {
                     onClick={() => nav(`/edit/${id}`)} 
                     text={"수정하기"} />
                 <Button 
-                    onClick={() => onDelete(id)} 
+                    onClick={onClickDeleteButton} 
                     text={"삭제하기"}
                     type={"NEGATIVE"} />
             </div>
