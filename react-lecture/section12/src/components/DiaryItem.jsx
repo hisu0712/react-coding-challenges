@@ -1,7 +1,7 @@
 import "./DiaryItem.css";
 import { getEmotionImage } from "../util/get-emotion-image";
 import Button from "./Button";
-import { useContext } from "react";
+import { useContext, memo } from "react";
 import { useNavigate } from "react-router-dom";
 import { DiaryDispatchContext } from "../App";
 
@@ -41,4 +41,4 @@ const DiaryItem = ({ id, emotionId, createdDate, content }) => {
     );
 }
 
-export default DiaryItem;
+export default memo(DiaryItem);
