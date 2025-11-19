@@ -2,18 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { ThemeProvider } from "styled-components";
-import { QueryClient, QueryClientProvider } from "react-query";
 import { RecoilRoot } from "recoil";
-
-const queryClient = new QueryClient();
 
 ReactDOM.render(
   <React.StrictMode>
     <RecoilRoot>
-      <QueryClientProvider client={queryClient}>
-        <App />
-      </QueryClientProvider>
+      <App />
     </RecoilRoot>
   </React.StrictMode>,
   document.getElementById("root")
