@@ -1,5 +1,6 @@
-import { createGlobalStyle } from "styled-components";
-import ToDoList from "./ToDoList";
+import { createGlobalStyle, ThemeProvider } from "styled-components";
+import ToDoList from "./components/ToDoList";
+import { darkTheme } from "./theme";
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&family=Stack+Sans+Text:wght@200..700&display=swap');
@@ -51,6 +52,8 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
     font-family: "Source Sans 3", sans-serif;
+    color: ${(props) => props.theme.textColor};
+    background: ${(props) => props.theme.bgColor};
   }
   a {
     text-decoration: none;
@@ -61,8 +64,10 @@ const GlobalStyle = createGlobalStyle`
 function App() {
   return (
     <>
-      <GlobalStyle />
-      <ToDoList />
+      <ThemeProvider theme={darkTheme}>
+        <GlobalStyle />
+        <ToDoList />
+      </ThemeProvider>
     </>
   );
 }
