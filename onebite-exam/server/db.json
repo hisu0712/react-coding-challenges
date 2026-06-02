@@ -4,41 +4,6 @@
       "id": "1",
       "content": "Todo 1",
       "isDone": true
-    },
-    {
-      "id": "2",
-      "content": "Todo 2",
-      "isDone": true
-    },
-    {
-      "id": "3",
-      "content": "Todo 3",
-      "isDone": false
-    },
-    {
-      "content": "dd",
-      "isDone": false,
-      "id": "bvUrvZtuUXw"
-    },
-    {
-      "content": "ff",
-      "isDone": false,
-      "id": "VbTiVVm1eSE"
-    },
-    {
-      "content": "ddd",
-      "isDone": false,
-      "id": "perdXegNvuA"
-    },
-    {
-      "content": "fff",
-      "isDone": false,
-      "id": "4VCu9AzfxDk"
-    },
-    {
-      "content": "f",
-      "isDone": false,
-      "id": "lYXPYudfoB0"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

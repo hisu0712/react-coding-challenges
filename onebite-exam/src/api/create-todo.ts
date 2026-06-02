@@ -9,7 +9,7 @@ export async function createTodo(content: string) {
       isDone: false,
     }),
   });
-  if (!response.ok) return new Error("Create Todo Failed");
+  if (!response.ok) throw new Error("Create Todo Failed");
 
   const data: Todo = await response.json();
   return data;
