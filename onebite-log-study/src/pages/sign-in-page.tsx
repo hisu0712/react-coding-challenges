@@ -1,17 +1,19 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useSignUpInWithPassword } from "@/hooks/mutations/use-sign-in-with-password";
+import { useSignInWithOAuth } from "@/hooks/mutations/use-sign-in-with-oauth";
+import { useSignInWithPassword } from "@/hooks/mutations/use-sign-in-with-password";
 import { generateErrorMessage } from "@/lib/error";
 import { useState } from "react";
 import { Link } from "react-router";
 import { toast } from "sonner";
+import gitHubLogo from "@/assets/github-mark.svg";
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const { mutate: signInWithPassword, isPending: isSignInWithPasswordPending } =
-    useSignUpInWithPassword({
+    useSignInWithPassword({
       onError: (error) => {
         const message = generateErrorMessage(error);
         toast.error(message, {
@@ -22,6 +24,17 @@ export default function SignInPage() {
       },
     });
 
+  // OAuth 노션 로그인(강의: github)
+  const { mutate: signInWithOAuth, isPending: isSignInWithOAuthPending } =
+    useSignInWithOAuth({
+      onError: (error) => {
+        const message = generateErrorMessage(error);
+        toast.error(message, {
+          position: "top-center",
+        });
+      },
+    });
+
   const handleSignInWithPasswordClick = () => {
     if (email.trim() === "") return;
     if (password.trim() === "") return;
@@ -29,9 +42,11 @@ export default function SignInPage() {
     signInWithPassword({ email, password });
   };
 
-  const isPending = isSignInWithPasswordPending;
+  const handleSignInWithOAuthClick = () => {
+    signInWithOAuth("notion");
+  };
 
-  // OAuth 카카오 로그인(강의: github)
+  const isPending = isSignInWithPasswordPending || isSignInWithOAuthPending;
 
   return (
     <div className="flex flex-col gap-8">
@@ -54,13 +69,22 @@ export default function SignInPage() {
           placeholder="password"
         />
       </div>
-      <div>
+      <div className="flex flex-col gap-2">
         <Button
           onClick={handleSignInWithPasswordClick}
           disabled={isPending}
           className="w-full"
         >
           로그인
+        </Button>
+        <Button
+          onClick={handleSignInWithOAuthClick}
+          disabled={isPending}
+          className="w-full"
+          variant={"outline"}
+        >
+          <img src={gitHubLogo} className="h-4 w-4" />
+          Notion 계정으로 로그인
         </Button>
       </div>
       <div>
