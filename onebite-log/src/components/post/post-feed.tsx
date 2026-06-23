@@ -5,9 +5,9 @@ import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 import { useInfinitePostsData } from "@/hooks/queries/use-infinite-posts-data";
 
-export default function PostFeed() {
+export default function PostFeed({ authorId }: { authorId?: string }) {
   const { data, error, isPending, fetchNextPage, isFetchingNextPage } =
-    useInfinitePostsData();
+    useInfinitePostsData(authorId);
   const { ref, inView } = useInView();
 
   useEffect(() => {
@@ -23,7 +23,9 @@ export default function PostFeed() {
   return (
     <div className="flex flex-col gap-10">
       {data.pages.map((page) =>
-        page.map((postId) => <PostItem key={postId} postId={postId} />),
+        page.map((postId) => (
+          <PostItem key={postId} postId={postId} type={"FEED"} />
+        )),
       )}
       {isFetchingNextPage && <Loader />}
 
