@@ -53,7 +53,7 @@ export default function SignInPage() {
           variant={"outline"}
         >
           <img src={githubLogo} className="h-4 w-4" />
-          깃허브 계정으로 로그인
+          구글 계정으로 로그인
         </Button>
       </div>
       <div>
