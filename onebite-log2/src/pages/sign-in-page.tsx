@@ -3,10 +3,10 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { Link } from "react-router";
 import githubLogo from "@/assets/github-mark.svg";
-import { UseSignInWithOAuth } from "@/hooks/mutations/use-sign-in-with-oauth";
+import { UseSignInWithOAuth } from "@/hooks/mutations/auth/use-sign-in-with-oauth";
 import { toast } from "sonner";
 import { generateErrorMessage } from "@/lib/error";
-import { UseSignInWithPassword } from "@/hooks/mutations/use-sign-in-with-password";
+import { UseSignInWithPassword } from "@/hooks/mutations/auth/use-sign-in-with-password";
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
