@@ -7,6 +7,7 @@ import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel";
 import { useSession } from "@/store/session";
 import { usePostEditorModal } from "@/store/post-editor-modal";
 import UseCreatePost from "@/hooks/mutations/post/use-create-post";
+import { useOpenAlertModal } from "@/store/alert";
 
 type Image = {
   file: File;
@@ -23,6 +24,7 @@ export default function PostEditorModal() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const { isOpen, open, close } = usePostEditorModal();
+  const openAlertModal = useOpenAlertModal();
 
   const { mutate: createPost, isPending: isCreatePostPending } = UseCreatePost({
     onSuccess: () => {
@@ -60,6 +62,18 @@ export default function PostEditorModal() {
   };
 
   const handleCloseEditorModal = () => {
+    if (content.trim() !== "" || images.length !== 0) {
+      openAlertModal({
+        title: "게시글 작성이 마무리 되지 않았습니다",
+        description: "이 화면에서 나가면 작성중이던 내용이 사리집니다.",
+        onPositive: () => {
+          close();
+        },
+      });
+
+      return;
+    }
+
     close();
   };
 
@@ -67,6 +81,8 @@ export default function PostEditorModal() {
     setImages((prevImages) =>
       prevImages.filter((item) => item.previewUrl !== image.previewUrl),
     );
+
+    URL.revokeObjectURL(image.previewUrl);
   };
 
   useEffect(() => {
@@ -78,7 +94,10 @@ export default function PostEditorModal() {
   }, [content]);
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen) {
+      images.map((image) => URL.revokeObjectURL(image.previewUrl));
+      return;
+    }
     textareaRef.current?.focus();
     setContent("");
     setImages([]);
