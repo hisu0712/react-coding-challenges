@@ -7,7 +7,7 @@ export const QUERY_KEYS = {
   post: {
     all: ["post"],
     list: ["post", "list"],
-    byId: (postId: string) => ["post", "list", postId],
+    byId: (postId: number) => ["post", "list", postId],
   },
 };
 

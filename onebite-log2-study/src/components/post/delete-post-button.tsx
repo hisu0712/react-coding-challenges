@@ -1,0 +1,31 @@
+import { UseDeletePost } from "@/hooks/mutations/post/use-delete-post";
+import { Button } from "../ui/button";
+import { useOpenAlertModal } from "@/store/alert";
+
+export default function DeletePostButton({ id }: { id: number }) {
+  const openAlertModal = useOpenAlertModal();
+
+  const { mutate: deletePost, isPending: isDeletePostPending } =
+    UseDeletePost();
+
+  const handleDeleteClick = () => {
+    openAlertModal({
+      title: "포스트 삭제",
+      description: "삭제된 포스트는 되돌릴 수 없습니다. 정말 삭제하시겠습니까?",
+      onPositive: () => {
+        deletePost(id);
+      },
+    });
+  };
+
+  return (
+    <Button
+      disabled={isDeletePostPending}
+      onClick={handleDeleteClick}
+      className="cursor-pointer"
+      variant={"ghost"}
+    >
+      삭제
+    </Button>
+  );
+}
