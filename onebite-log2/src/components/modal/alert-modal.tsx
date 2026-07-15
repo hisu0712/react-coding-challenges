@@ -16,11 +16,11 @@ export default function AlertModal() {
 
   const handleCancelClick = () => {
     if (store.onNegative) store.onNegative();
-    store.action.close();
+    store.actions.close();
   };
   const handleActionClick = () => {
     if (store.onPositive) store.onPositive();
-    store.action.close();
+    store.actions.close();
   };
 
   return (

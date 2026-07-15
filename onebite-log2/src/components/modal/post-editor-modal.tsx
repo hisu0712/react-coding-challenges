@@ -58,7 +58,7 @@ export default function PostEditorModal() {
   }, [isOpen]);
 
   const handleCloseModal = () => {
-    if (content !== "" || images.length !== 0) {
+    if (content.trim() !== "" || images.length !== 0) {
       openAlertModal({
         title: "게시글 작성이 마무리 되지 않았습니다",
         description: "이 화면에서 나가면 작성중이던 내용이 사리집니다.",
